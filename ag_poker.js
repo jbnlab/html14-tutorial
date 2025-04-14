@@ -15,25 +15,25 @@
 window.addEventListener("load", playDrawPoker);
 
 function playDrawPoker() {
-   var dealButton = document.getElementById("dealB");
-   var drawButton = document.getElementById("drawB");
-   var standButton = document.getElementById("standB");
-   var resetButton = document.getElementById("resetB");
-   var handValueText = document.getElementById("handValue");
-   var betSelection = document.getElementById("bet");
-   var bankBox = document.getElementById("bank");
-   var cardImages = document.querySelectorAll("img.cardImg");
+   const dealButton = document.getElementById("dealB");
+   const drawButton = document.getElementById("drawB");
+   const standButton = document.getElementById("standB");
+   const resetButton = document.getElementById("resetB");
+   const handValueText = document.getElementById("handValue");
+   const betSelection = document.getElementById("bet");
+   const bankBox = document.getElementById("bank");
+   const cardImages = document.querySelectorAll("img.cardImg");
 
    // Set the initial values of the pokerGame object
    pokerGame.currentBank = 500;
    pokerGame.currentBet = 25;
 
    // Create a new deck of cards and shuffle it
-   var myDeck = new pokerDeck();
+   let myDeck = new pokerDeck();
    myDeck.shuffle();
 
    // Create a pokerHand object
-   var myHand = new pokerHand(5);
+   let myHand = new pokerHand(5);
 
    bankBox.value = pokerGame.currentBank;
    betSelection.onchange = function(e) {
@@ -69,7 +69,7 @@ function playDrawPoker() {
          myDeck.dealTo(myHand);
 
          // Display the card images on the table
-         for (var i = 0; i < cardImages.length; i++) {
+         for (let i = 0; i < cardImages.length; i++) {
             cardImages[i].src = myHand.cards[i].cardImage();
 
             // Event handler for each card image
@@ -98,7 +98,7 @@ function playDrawPoker() {
       disableObj(standButton);
 
       // Replace the cards selected for discarding
-      for (var i = 0; i < cardImages.length; i++) {
+      for (let i = 0; i < cardImages.length; i++) {
          if (cardImages[i].discard) {
             myHand.cards[i].replaceFromDeck(myDeck);
             cardImages[i].src = myHand.cards[i].cardImage();

@@ -35,7 +35,7 @@
 */
 
 /*  The pokerGame Object */
-var pokerGame = {
+let pokerGame = {
    currentBank: null,
    currentBet: null,
 
@@ -59,7 +59,7 @@ function pokerCard(cardSuit, cardRank) {
 
 /*  Method to reference the image source file for a card */
 pokerCard.prototype.cardImage = function() {
-   var suitAbbr = this.suit.substring(0, 1).toLowerCase();
+   let suitAbbr = this.suit.substring(0, 1).toLowerCase();
    return suitAbbr + this.rankValue + ".png";
 };
 
@@ -88,7 +88,7 @@ pokerHand.prototype.highCard = function() {
 
 /* Test for the presence of a flush */
 pokerHand.prototype.hasFlush = function() {
-   var firstSuit = this.cards[0].suit;
+   const firstSuit = this.cards[0].suit;
    return this.cards.every(function(card) {
       return card.suit === firstSuit;
    });
@@ -121,7 +121,7 @@ pokerHand.prototype.hasRoyalFlush = function() {
 /*  Test for duplicates in the hand */
 pokerHand.prototype.hasSets = function() {
    // handSets summarizes the duplicates in the hand
-   var handSets = {};
+   let handSets = {};
    this.cards.forEach(function(card) {
       if (handSets.hasOwnProperty(card.rankValue)) {
          handSets[card.rankValue]++;
@@ -130,10 +130,10 @@ pokerHand.prototype.hasSets = function() {
       }
    });
 
-   var sets = "none";
+   let sets = "none";
    var pairRank;
 
-   for (var cardRank in handSets) {
+   for (let cardRank in handSets) {
       if (handSets[cardRank] === 4) {sets = "Four of a Kind";}
       if (handSets[cardRank] === 3) {
          if (sets === "Pair") {sets = "Full House";}
@@ -160,7 +160,7 @@ pokerHand.prototype.handType = function() {
    else if (this.hasFlush()) {return "Flush";}
    else if (this.hasStraight()) {return "Straight";}
    else {
-      var sets = this.hasSets();
+      let sets = this.hasSets();
       if (sets === "Pair" || sets === "none") {sets = "No Winner";}
       return sets;
    }
@@ -186,14 +186,14 @@ pokerHand.prototype.handOdds = function() {
 function pokerDeck() {
    this.cards = new Array(52);
 
-   var suits = ["Clubs", "Diamonds", "Hearts", "Spades"];
-   var ranks = ["2", "3", "4", "5", "6",
+   const suits = ["Clubs", "Diamonds", "Hearts", "Spades"];
+   const ranks = ["2", "3", "4", "5", "6",
                "7", "8", "9", "10",
                "Jack", "Queen", "King", "Ace"];
 
-   var cardCount = 0;
-   for (var i= 0; i < 4; i++) {
-      for (var j = 0; j < 13; j++) {
+   let cardCount = 0;
+   for (let i= 0; i < 4; i++) {
+      for (let j = 0; j < 13; j++) {
          this.cards[cardCount] = new pokerCard(suits[i], ranks[j]);
          this.cards[cardCount].rankValue = j+2;
          cardCount++;
@@ -209,7 +209,7 @@ function pokerDeck() {
 
    // Method to deal cards from the deck into a poker hand
    this.dealTo = function(pokerHand) {
-      for (var i = 0; i < pokerHand.cards.length; i++) {
+      for (let i = 0; i < pokerHand.cards.length; i++) {
          pokerHand.cards[i] = this.cards.shift();
       }
    };
